@@ -9,3 +9,21 @@
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/home.css">
 </head>
 <body>
+
+<header class="site-header">
+    <div class="container site-header__inner">
+        <a class="site-logo" href="<?php echo URLROOT; ?>/">FitForFun</a>
+
+        <nav class="site-nav">
+            <a href="<?php echo URLROOT; ?>/">Home</a>
+            <a href="<?php echo URLROOT; ?>/../app/views/aanbiedingenlessen/index.php">Aanbiedingen</a>
+            <a href="<?php echo URLROOT; ?>/../app/views/lessenoverzicht/index.php">Lessen</a>
+            <a href="<?php echo URLROOT; ?>/../app/views/zoekenlesnaam/index.php">Zoeken</a>
+            <a href="<?php echo URLROOT; ?>/../app/views/accountenoverzicht/index.php">Accounts</a>
+            <a href="<?php echo URLROOT; ?>/../app/views/medewerkeroverzicht/index.php">Medewerkers</a>
+            <a href="<?php echo URLROOT; ?>/../app/views/ledenoverzicht/index.php">Leden</a>
+            <a href="<?php echo URLROOT; ?>/../app/views/reserveringoverzicht/index.php">Reserveringen</a>
+            <a href="<?php echo URLROOT; ?>/../app/views/geplandelessenoverzicht/index.php">Planning</a>
+        </nav>
+    </div>
+</header>
