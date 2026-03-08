@@ -1,0 +1,98 @@
+.medewerkers-hero {
+    padding: 110px 0 70px 0;
+    background: linear-gradient(135deg, #2c7a4b, #1f5c38);
+    color: #ffffff;
+}
+
+.medewerkers-badge {
+    display: inline-block;
+    margin-bottom: 18px;
+    padding: 8px 14px;
+    background-color: #ffffff;
+    color: #2c7a4b;
+    border-radius: 999px;
+    font-weight: 700;
+}
+
+.medewerkers-hero h1 {
+    margin-bottom: 18px;
+    font-size: 52px;
+    line-height: 1.1;
+}
+
+.medewerkers-intro {
+    max-width: 720px;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.medewerkers-overzicht {
+    padding: 80px 0;
+    background-color: #f6fbf8;
+}
+
+.medewerkers-tabel-wrapper {
+    overflow-x: auto;
+    background-color: #ffffff;
+    border: 1px solid #d8e8dd;
+    border-radius: 18px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+}
+
+.medewerkers-tabel {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.medewerkers-tabel thead {
+    background-color: #2c7a4b;
+    color: #ffffff;
+}
+
+.medewerkers-tabel th,
+.medewerkers-tabel td {
+    padding: 16px 14px;
+    text-align: left;
+    border-bottom: 1px solid #e4efe7;
+}
+
+.medewerkers-tabel tbody tr:hover {
+    background-color: #f1f8f4;
+}
+
+.medewerkers-fout {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 60px 0;
+    background: linear-gradient(135deg, #2c7a4b, #1f5c38);
+}
+
+.medewerkers-fout-box {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 50px 40px;
+    background-color: #ffffff;
+    border-radius: 18px;
+    text-align: center;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
+}
+
+.medewerkers-fout-box h1 {
+    margin-bottom: 18px;
+    color: #2c7a4b;
+    font-size: 40px;
+}
+
+.medewerkers-fout-box p {
+    margin-bottom: 24px;
+    color: #355342;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+@media (max-width: 900px) {
+    .medewerkers-hero h1 {
+        font-size: 40px;
+    }
+}
