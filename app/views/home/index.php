@@ -4,5 +4,3 @@
 <p>Startpagina van FitForFun.</p>
 
 <?php require_once '../../includes/footer.php'; ?>
-
-TEST
