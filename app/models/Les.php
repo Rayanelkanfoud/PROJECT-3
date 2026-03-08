@@ -22,4 +22,18 @@ class Les
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function zoekOpNaam($zoekterm)
+    {
+        $sql = "SELECT id, naam, prijs, datum, tijd, status, is_aanbieding
+                FROM lessen
+                WHERE naam LIKE :zoekterm
+                ORDER BY datum ASC, tijd ASC";
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':zoekterm', '%' . $zoekterm . '%', PDO::PARAM_STR);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
