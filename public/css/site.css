@@ -49,3 +49,56 @@ a {
 .button-secondary:hover {
     background-color: #f1f8f4;
 }
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    color: #1f3b2d;
+    margin: 0;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: #ffffff;
+    border-bottom: 1px solid #dfeee4;
+}
+
+.site-header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 0;
+    gap: 24px;
+}
+
+.site-logo {
+    color: #2c7a4b;
+    font-size: 28px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.site-nav {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+}
+
+.site-nav a {
+    color: #2c7a4b;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.site-nav a:hover {
+    color: #1f5c38;
+}
