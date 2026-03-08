@@ -22,4 +22,27 @@ class Lid
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function zoekOpAchternaam($zoekterm)
+    {
+        $sql = "SELECT
+                    l.id,
+                    g.voornaam,
+                    g.tussenvoegsel,
+                    g.achternaam,
+                    g.email,
+                    l.mobiel,
+                    l.relatienummer,
+                    l.is_actief
+                FROM leden l
+                INNER JOIN gebruikers g ON l.gebruiker_id = g.id
+                WHERE g.achternaam LIKE :zoekterm
+                ORDER BY g.achternaam ASC, g.voornaam ASC";
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':zoekterm', '%' . $zoekterm . '%', PDO::PARAM_STR);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

@@ -1,0 +1,323 @@
+.lidzoeken-hero {
+    padding: 110px 0 70px 0;
+    background: linear-gradient(135deg, #2c7a4b, #1f5c38);
+    color: #ffffff;
+}
+
+.lidzoeken-badge {
+    display: inline-block;
+    margin-bottom: 18px;
+    padding: 8px 14px;
+    background-color: #ffffff;
+    color: #2c7a4b;
+    border-radius: 999px;
+    font-weight: 700;
+}
+
+.lidzoeken-hero h1 {
+    margin-bottom: 18px;
+    font-size: 52px;
+    line-height: 1.1;
+}
+
+.lidzoeken-intro {
+    max-width: 720px;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.lidzoeken-sectie {
+    padding: 80px 0;
+    background-color: #f6fbf8;
+}
+
+.lidzoeken-box {
+    padding: 32px;
+    background-color: #ffffff;
+    border: 1px solid #d8e8dd;
+    border-radius: 18px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+}
+
+.lidzoeken-formulier {
+    display: flex;
+    align-items: end;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+}
+
+.lidzoeken-formulier label {
+    width: 100%;
+    color: #2c7a4b;
+    font-weight: 700;
+}
+
+.lidzoeken-formulier input {
+    flex: 1;
+    min-width: 260px;
+    padding: 14px 16px;
+    border: 1px solid #cfe1d5;
+    border-radius: 10px;
+    font-size: 16px;
+    outline: none;
+}
+
+.lidzoeken-formulier input:focus {
+    border-color: #2c7a4b;
+}
+
+.lidzoeken-melding {
+    margin-bottom: 24px;
+    padding: 16px 18px;
+    border-radius: 10px;
+    background-color: #edf7f0;
+    color: #2c7a4b;
+    font-weight: 600;
+}
+
+.lidzoeken-melding--fout {
+    background-color: #fff1f1;
+    color: #a13b3b;
+}
+
+.lidzoeken-resultaten h2 {
+    margin-bottom: 18px;
+    color: #2c7a4b;
+    font-size: 28px;
+}
+
+.lidzoeken-tabel-wrapper {
+    overflow-x: auto;
+    background-color: #ffffff;
+    border: 1px solid #d8e8dd;
+    border-radius: 18px;
+}
+
+.lidzoeken-tabel {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.lidzoeken-tabel thead {
+    background-color: #2c7a4b;
+    color: #ffffff;
+}
+
+.lidzoeken-tabel th,
+.lidzoeken-tabel td {
+    padding: 16px 14px;
+    text-align: left;
+    border-bottom: 1px solid #e4efe7;
+}
+
+.lidzoeken-tabel tbody tr:hover {
+    background-color: #f1f8f4;
+}
+
+.lidzoeken-fout {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 60px 0;
+    background: linear-gradient(135deg, #2c7a4b, #1f5c38);
+}
+
+.lidzoeken-fout-box {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 50px 40px;
+    background-color: #ffffff;
+    border-radius: 18px;
+    text-align: center;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
+}
+
+.lidzoeken-fout-box h1 {
+    margin-bottom: 18px;
+    color: #2c7a4b;
+    font-size: 40px;
+}
+
+.lidzoeken-fout-box p {
+    margin-bottom: 24px;
+    color: #355342;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+@media (max-width: 900px) {
+    .lidzoeken-hero h1 {
+        font-size: 40px;
+    }
+
+    .lidzoeken-formulier {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .lidzoeken-formulier input {
+        width: 100%;
+    }
+}.lidzoeken-hero {
+    padding: 110px 0 70px 0;
+    background: linear-gradient(135deg, #2c7a4b, #1f5c38);
+    color: #ffffff;
+}
+
+.lidzoeken-badge {
+    display: inline-block;
+    margin-bottom: 18px;
+    padding: 8px 14px;
+    background-color: #ffffff;
+    color: #2c7a4b;
+    border-radius: 999px;
+    font-weight: 700;
+}
+
+.lidzoeken-hero h1 {
+    margin-bottom: 18px;
+    font-size: 52px;
+    line-height: 1.1;
+}
+
+.lidzoeken-intro {
+    max-width: 720px;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.lidzoeken-sectie {
+    padding: 80px 0;
+    background-color: #f6fbf8;
+}
+
+.lidzoeken-box {
+    padding: 32px;
+    background-color: #ffffff;
+    border: 1px solid #d8e8dd;
+    border-radius: 18px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+}
+
+.lidzoeken-formulier {
+    display: flex;
+    align-items: end;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+}
+
+.lidzoeken-formulier label {
+    width: 100%;
+    color: #2c7a4b;
+    font-weight: 700;
+}
+
+.lidzoeken-formulier input {
+    flex: 1;
+    min-width: 260px;
+    padding: 14px 16px;
+    border: 1px solid #cfe1d5;
+    border-radius: 10px;
+    font-size: 16px;
+    outline: none;
+}
+
+.lidzoeken-formulier input:focus {
+    border-color: #2c7a4b;
+}
+
+.lidzoeken-melding {
+    margin-bottom: 24px;
+    padding: 16px 18px;
+    border-radius: 10px;
+    background-color: #edf7f0;
+    color: #2c7a4b;
+    font-weight: 600;
+}
+
+.lidzoeken-melding--fout {
+    background-color: #fff1f1;
+    color: #a13b3b;
+}
+
+.lidzoeken-resultaten h2 {
+    margin-bottom: 18px;
+    color: #2c7a4b;
+    font-size: 28px;
+}
+
+.lidzoeken-tabel-wrapper {
+    overflow-x: auto;
+    background-color: #ffffff;
+    border: 1px solid #d8e8dd;
+    border-radius: 18px;
+}
+
+.lidzoeken-tabel {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.lidzoeken-tabel thead {
+    background-color: #2c7a4b;
+    color: #ffffff;
+}
+
+.lidzoeken-tabel th,
+.lidzoeken-tabel td {
+    padding: 16px 14px;
+    text-align: left;
+    border-bottom: 1px solid #e4efe7;
+}
+
+.lidzoeken-tabel tbody tr:hover {
+    background-color: #f1f8f4;
+}
+
+.lidzoeken-fout {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 60px 0;
+    background: linear-gradient(135deg, #2c7a4b, #1f5c38);
+}
+
+.lidzoeken-fout-box {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 50px 40px;
+    background-color: #ffffff;
+    border-radius: 18px;
+    text-align: center;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
+}
+
+.lidzoeken-fout-box h1 {
+    margin-bottom: 18px;
+    color: #2c7a4b;
+    font-size: 40px;
+}
+
+.lidzoeken-fout-box p {
+    margin-bottom: 24px;
+    color: #355342;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+@media (max-width: 900px) {
+    .lidzoeken-hero h1 {
+        font-size: 40px;
+    }
+
+    .lidzoeken-formulier {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .lidzoeken-formulier input {
+        width: 100%;
+    }
+}
