@@ -102,3 +102,11 @@ body {
 .site-nav a:hover {
     color: #1f5c38;
 }
+
+.site-header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 14px 0;
+}
