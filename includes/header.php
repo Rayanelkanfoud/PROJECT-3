@@ -7,16 +7,17 @@
     <title><?php echo APP_NAAM; ?></title>
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/site.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/home.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/aanbiedingen.css">
 </head>
 <body>
 
 <header class="site-header">
     <div class="container site-header__inner">
-        <a class="site-logo" href="<?php echo URLROOT; ?>/">FitForFun</a>
+        <a class="site-logo" href="<?php echo URLROOT; ?>">FitForFun</a>
 
         <nav class="site-nav">
-            <a href="<?php echo URLROOT; ?>/">Home</a>
-            <a href="<?php echo URLROOT; ?>/../app/views/aanbiedingenlessen/index.php">Aanbiedingen</a>
+            <a href="<?php echo URLROOT; ?>">Home</a>
+            <a href="<?php echo URLROOT; ?>/aanbiedingen.php">Aanbiedingen</a>
             <a href="<?php echo URLROOT; ?>/../app/views/lessenoverzicht/index.php">Lessen</a>
             <a href="<?php echo URLROOT; ?>/../app/views/zoekenlesnaam/index.php">Zoeken</a>
             <a href="<?php echo URLROOT; ?>/../app/views/accountenoverzicht/index.php">Accounts</a>

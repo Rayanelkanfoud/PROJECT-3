@@ -1,5 +1,5 @@
 .aanbiedingen-hero {
-    padding: 100px 0 60px 0;
+    padding: 110px 0 70px 0;
     background: linear-gradient(135deg, #2c7a4b, #1f5c38);
     color: #ffffff;
 }
@@ -87,6 +87,10 @@
     margin: 0 0 28px 20px;
     color: #355342;
     line-height: 1.9;
+}
+
+.pakket-lijst li {
+    margin-bottom: 8px;
 }
 
 .aanbiedingen-fout {
