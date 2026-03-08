@@ -1,6 +1,44 @@
-<?php require_once '../../includes/header.php'; ?>
+<?php require_once __DIR__ . '/../../../includes/header.php'; ?>
 
-<h1>Reservering overzicht</h1>
-<p>Pagina in opbouw.</p>
+<section class="reserveringen-hero">
+    <div class="container">
+        <p class="reserveringen-badge">Reservering overzicht</p>
+        <h1>Bekijk alle reserveringen in het systeem</h1>
+        <p class="reserveringen-intro">
+            Hieronder zie je een overzicht van alle reserveringen met lid, les, datum, tijd en status.
+        </p>
+    </div>
+</section>
 
-<?php require_once '../../includes/footer.php'; ?>
+<section class="reserveringen-overzicht">
+    <div class="container">
+        <div class="reserveringen-tabel-wrapper">
+            <table class="reserveringen-tabel">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Lid</th>
+                        <th>Les</th>
+                        <th>Datum</th>
+                        <th>Tijd</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($reserveringen as $reservering): ?>
+                        <tr>
+                            <td><?php echo $reservering['id']; ?></td>
+                            <td><?php echo htmlspecialchars($reservering['lid_naam']); ?></td>
+                            <td><?php echo htmlspecialchars($reservering['les_naam']); ?></td>
+                            <td><?php echo htmlspecialchars($reservering['datum']); ?></td>
+                            <td><?php echo htmlspecialchars($reservering['tijd']); ?></td>
+                            <td><?php echo htmlspecialchars($reservering['reserveringsstatus']); ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<?php require_once __DIR__ . '/../../../includes/footer.php'; ?>
