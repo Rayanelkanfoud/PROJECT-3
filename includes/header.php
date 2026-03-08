@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo APP_NAAM; ?></title>
+
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/site.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/home.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/aanbiedingen.css">
@@ -12,6 +13,10 @@
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/zoeken.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/accounts.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/medewerkers.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/leden.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/lidzoeken.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/reserveringen.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/geplandelessen.css">
 </head>
 <body>
 
@@ -23,12 +28,13 @@
             <a href="<?php echo URLROOT; ?>">Home</a>
             <a href="<?php echo URLROOT; ?>/aanbiedingen.php">Aanbiedingen</a>
             <a href="<?php echo URLROOT; ?>/lessen.php">Lessen</a>
-            <a href="<?php echo URLROOT; ?>/zoeken.php">Zoeken</a>
+            <a href="<?php echo URLROOT; ?>/zoeken.php">Zoeken les</a>
             <a href="<?php echo URLROOT; ?>/accounts.php">Accounts</a>
             <a href="<?php echo URLROOT; ?>/medewerkers.php">Medewerkers</a>
-            <a href="<?php echo URLROOT; ?>/../app/views/ledenoverzicht/index.php">Leden</a>
-            <a href="<?php echo URLROOT; ?>/../app/views/reserveringoverzicht/index.php">Reserveringen</a>
-            <a href="<?php echo URLROOT; ?>/../app/views/geplandelessenoverzicht/index.php">Planning</a>
+            <a href="<?php echo URLROOT; ?>/leden.php">Leden</a>
+            <a href="<?php echo URLROOT; ?>/lidzoeken.php">Zoeken lid</a>
+            <a href="<?php echo URLROOT; ?>/reserveringen.php">Reserveringen</a>
+            <a href="<?php echo URLROOT; ?>/geplandelessen.php">Planning</a>
         </nav>
     </div>
 </header>
