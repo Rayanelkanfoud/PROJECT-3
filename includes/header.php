@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/site.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/home.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/aanbiedingen.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/lessen.css">
 </head>
 <body>
 
@@ -18,7 +19,7 @@
         <nav class="site-nav">
             <a href="<?php echo URLROOT; ?>">Home</a>
             <a href="<?php echo URLROOT; ?>/aanbiedingen.php">Aanbiedingen</a>
-            <a href="<?php echo URLROOT; ?>/../app/views/lessenoverzicht/index.php">Lessen</a>
+            <a href="<?php echo URLROOT; ?>/lessen.php">Lessen</a>
             <a href="<?php echo URLROOT; ?>/../app/views/zoekenlesnaam/index.php">Zoeken</a>
             <a href="<?php echo URLROOT; ?>/../app/views/accountenoverzicht/index.php">Accounts</a>
             <a href="<?php echo URLROOT; ?>/../app/views/medewerkeroverzicht/index.php">Medewerkers</a>
