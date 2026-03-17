@@ -25,14 +25,11 @@
         <a class="site-logo" href="<?php echo URLROOT; ?>">FitForFun</a>
 
         <nav class="site-nav">
-            <a href="<?php echo URLROOT; ?>">Home</a>
             <a href="<?php echo URLROOT; ?>/aanbiedingen.php">Aanbiedingen</a>
             <a href="<?php echo URLROOT; ?>/lessen.php">Lessen</a>
-            <a href="<?php echo URLROOT; ?>/zoeken.php">Zoeken les</a>
             <a href="<?php echo URLROOT; ?>/accounts.php">Accounts</a>
             <a href="<?php echo URLROOT; ?>/medewerkers.php">Medewerkers</a>
             <a href="<?php echo URLROOT; ?>/leden.php">Leden</a>
-            <a href="<?php echo URLROOT; ?>/lidzoeken.php">Zoeken lid</a>
             <a href="<?php echo URLROOT; ?>/reserveringen.php">Reserveringen</a>
             <a href="<?php echo URLROOT; ?>/geplandelessen.php">Planning</a>
         </nav>
