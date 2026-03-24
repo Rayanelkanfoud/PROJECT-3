@@ -18,6 +18,18 @@ class Lid
         return $this->db->resultSet();
     }
 
+    public function getAlleLeden()
+    {
+        $sql = "SELECT id, volledige_naam, email, mobiel, relatienummer, is_actief
+                FROM view_leden_overzicht
+                ORDER BY volledige_naam ASC";
+
+        $stmt = $this->db->getVerbinding()->prepare($sql);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     /** Zoek op achternaam */
     public function zoekOpAchternaam($zoek)
     {
@@ -78,26 +90,15 @@ class Lid
         return $this->db->execute();
     }
 
-    /** Controleert of e-mail al bestaat (optioneel: sluit huidig id uit) */
-    public function emailBestaat($email, $uitgeslotenId = null)
-    {
-        if ($uitgeslotenId) {
-            $this->db->query("SELECT Id FROM leden WHERE Email = :email AND Id != :id");
-            $this->db->bind(':id', $uitgeslotenId, PDO::PARAM_INT);
-        } else {
-            $this->db->query("SELECT Id FROM leden WHERE Email = :email");
-        }
-        $this->db->bind(':email', $email, PDO::PARAM_STR);
-        return $this->db->single() ? true : false;
-    }
-
     public function voegLidToe($voornaam, $tussenvoegsel, $achternaam, $email, $wachtwoord, $mobiel, $relatienummer)
     {
+        $pdo = $this->db->getVerbinding();
+
         // Voeg gebruiker toe
         $sql = "INSERT INTO gebruikers (voornaam, tussenvoegsel, achternaam, email, wachtwoord, rol_id, is_actief)
                 VALUES (:voornaam, :tussenvoegsel, :achternaam, :email, :wachtwoord, 3, b'1')";
 
-        $stmt = $this->db->prepare($sql);
+        $stmt = $pdo->prepare($sql);
         $stmt->bindValue(':voornaam',      $voornaam,      PDO::PARAM_STR);
         $stmt->bindValue(':tussenvoegsel', $tussenvoegsel, PDO::PARAM_STR);
         $stmt->bindValue(':achternaam',    $achternaam,    PDO::PARAM_STR);
@@ -105,13 +106,13 @@ class Lid
         $stmt->bindValue(':wachtwoord',    $wachtwoord,    PDO::PARAM_STR);
         $stmt->execute();
 
-        $gebruikerId = $this->db->lastInsertId();
+        $gebruikerId = $pdo->lastInsertId();
 
         // Voeg lid toe
-        $sql2 = "INSERT INTO leden (gebruiker_id, mobiel, relatienummer, is_actief)
+        $sql2 = "INSERT INTO leden_nieuw (gebruiker_id, mobiel, relatienummer, is_actief)
                  VALUES (:gebruiker_id, :mobiel, :relatienummer, b'1')";
 
-        $stmt2 = $this->db->prepare($sql2);
+        $stmt2 = $pdo->prepare($sql2);
         $stmt2->bindValue(':gebruiker_id',  $gebruikerId,   PDO::PARAM_INT);
         $stmt2->bindValue(':mobiel',        $mobiel,        PDO::PARAM_STR);
         $stmt2->bindValue(':relatienummer', $relatienummer, PDO::PARAM_STR);
@@ -122,7 +123,7 @@ class Lid
     public function emailBestaat($email)
     {
         $sql = "SELECT id FROM gebruikers WHERE email = :email";
-        $stmt = $this->db->prepare($sql);
+        $stmt = $this->db->getVerbinding()->prepare($sql);
         $stmt->bindValue(':email', $email, PDO::PARAM_STR);
         $stmt->execute();
 
