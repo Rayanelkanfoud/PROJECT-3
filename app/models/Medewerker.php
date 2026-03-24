@@ -1,25 +1,42 @@
 <?php
-require_once __DIR__ . '/../libraries/Database.php';
-
+/**
+ * Model: Medewerker — beheert medewerkers in de tabel accounts (Rol = 'medewerker')
+ */
 class Medewerker
 {
     private $db;
 
     public function __construct()
     {
-        $database = new Database();
-        $this->db = $database->getVerbinding();
+        $this->db = new Database();
     }
 
-    public function getAlleMedewerkers()
+    /** Geeft alle medewerkers terug */
+    public function getAll()
     {
-        $sql = "SELECT id, volledige_naam, medewerkersoort, email, telefoonnummer, is_actief
-                FROM view_medewerker_overzicht
-                ORDER BY volledige_naam ASC";
+        $this->db->query("SELECT * FROM accounts WHERE Rol = 'medewerker' ORDER BY Naam ASC");
+        return $this->db->resultSet();
+    }
 
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute();
+    /** Voegt een nieuwe medewerker toe — geeft true/false terug */
+    public function create($data)
+    {
+        $this->db->query(
+            "INSERT INTO accounts (Naam, Email, Wachtwoord, Rol, Status)
+             VALUES (:naam, :email, :wachtwoord, 'medewerker', :status)"
+        );
+        $this->db->bind(':naam',       $data['naam'],       PDO::PARAM_STR);
+        $this->db->bind(':email',      $data['email'],      PDO::PARAM_STR);
+        $this->db->bind(':wachtwoord', $data['wachtwoord'], PDO::PARAM_STR);
+        $this->db->bind(':status',     $data['status'],     PDO::PARAM_STR);
+        return $this->db->execute();
+    }
 
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    /** Controleert of e-mail al bestaat in accounts */
+    public function emailBestaat($email)
+    {
+        $this->db->query("SELECT Id FROM accounts WHERE Email = :email");
+        $this->db->bind(':email', $email, PDO::PARAM_STR);
+        return $this->db->single() ? true : false;
     }
 }

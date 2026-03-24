@@ -1,28 +1,46 @@
 <?php
-// Model laden om medewerkers uit de database op te halen
-require_once '../app/models/Medewerker.php';
-
-// Hiermee kun je tijdelijk het unhappy scenario testen
-$testUnhappy = false;
-
-try {
-    if ($testUnhappy) {
-        // Lege array gebruiken om foutscenario te testen
-        $medewerkers = [];
-    } else {
-        // Model aanmaken en alle medewerkers ophalen
-        $medewerkerModel = new Medewerker();
-        $medewerkers = $medewerkerModel->getAlleMedewerkers();
+class MedewerkerController extends BaseController
+{
+    // READ — overzicht
+    public function index()
+    {
+        $medewerkerModel = $this->model('Medewerker');
+        $this->view('medewerker/index', ['medewerkers' => $medewerkerModel->getAll()]);
     }
 
-    // Als er medewerkers zijn gevonden, toon het overzicht
-    if (!empty($medewerkers)) {
-        require_once '../app/views/medewerkeroverzicht/index.php';
-    } else {
-        // Unhappy flow: geen medewerkers gevonden
-        require_once '../app/views/medewerkeroverzicht/fout.php';
+    // CREATE — formulier tonen + opslaan
+    public function create()
+    {
+        $data = ['fouten' => [], 'naam' => '', 'email' => '', 'wachtwoord' => '', 'status' => 'actief'];
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $data = array_merge($data, [
+                'naam'       => trim($_POST['naam']       ?? ''),
+                'email'      => trim($_POST['email']      ?? ''),
+                'wachtwoord' => $_POST['wachtwoord']      ?? '',
+                'status'     => $_POST['status']          ?? 'actief',
+            ]);
+
+            // Validatie
+            if (empty($data['naam']))       $data['fouten'][] = 'Naam is verplicht.';
+            if (empty($data['email']))      $data['fouten'][] = 'E-mail is verplicht.';
+            elseif (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) $data['fouten'][] = 'Ongeldig e-mailadres.';
+            if (empty($data['wachtwoord'])) $data['fouten'][] = 'Wachtwoord is verplicht.';
+            elseif (strlen($data['wachtwoord']) < 8) $data['fouten'][] = 'Wachtwoord moet minimaal 8 tekens bevatten.';
+
+            if (empty($data['fouten'])) {
+                $medewerkerModel = $this->model('Medewerker');
+                if ($medewerkerModel->emailBestaat($data['email'])) {
+                    $data['fouten'][] = 'Dit e-mailadres is al in gebruik.';
+                } else {
+                    $data['wachtwoord'] = password_hash($data['wachtwoord'], PASSWORD_DEFAULT);
+                    $medewerkerModel->create($data);
+                    header('Location: ' . URLROOT . '/medewerker/index?melding=toegevoegd');
+                    exit;
+                }
+            }
+        }
+
+        $this->view('medewerker/create', $data);
     }
-} catch (Exception $e) {
-    // Als er een fout optreedt, toon de foutpagina
-    require_once '../app/views/medewerkeroverzicht/fout.php';
 }
