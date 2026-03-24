@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/lidzoeken.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/reserveringen.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/geplandelessen.css">
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/nieuwlid.css">
 </head>
 <body>
 
@@ -32,6 +33,7 @@
             <a href="<?php echo URLROOT; ?>/accounts.php">Accounts</a>
             <a href="<?php echo URLROOT; ?>/medewerkers.php">Medewerkers</a>
             <a href="<?php echo URLROOT; ?>/leden.php">Leden</a>
+            <a href="<?php echo URLROOT; ?>/nieuwlid.php">Nieuw lid</a>
             <a href="<?php echo URLROOT; ?>/lidzoeken.php">Zoeken lid</a>
             <a href="<?php echo URLROOT; ?>/reserveringen.php">Reserveringen</a>
             <a href="<?php echo URLROOT; ?>/geplandelessen.php">Planning</a>
