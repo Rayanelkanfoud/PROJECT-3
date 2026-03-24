@@ -65,4 +65,6 @@ try {
     } else {
         require_once '../app/views/medewerkeroverzicht/fout.php';
     }
+} catch (Exception $e) {
+    require_once '../app/views/medewerkeroverzicht/fout.php';
 }

@@ -1,71 +1,70 @@
 <?php
-/**
- * Model: Medewerker — beheert medewerkers in de tabel accounts (Rol = 'medewerker')
- */
+require_once __DIR__ . '/../libraries/Database.php';
+
 class Medewerker
 {
     private $db;
 
     public function __construct()
     {
-        $this->db = new Database();
+        $database = new Database();
+        $this->db = $database->getVerbinding();
     }
 
-    /** Geeft alle medewerkers terug */
-    public function getAll()
+    public function getAlleMedewerkers()
     {
-        $this->db->query("SELECT * FROM accounts WHERE Rol = 'medewerker' ORDER BY Naam ASC");
-        return $this->db->resultSet();
-    }
+        $sql = "SELECT id, volledige_naam, medewerkersoort, email, telefoonnummer, is_actief
+                FROM view_medewerker_overzicht
+                ORDER BY volledige_naam ASC";
 
-    /** Voegt een nieuwe medewerker toe — geeft true/false terug */
-    public function create($data)
-    {
-        $this->db->query(
-            "INSERT INTO accounts (Naam, Email, Wachtwoord, Rol, Status)
-             VALUES (:naam, :email, :wachtwoord, 'medewerker', :status)"
-        );
-        $this->db->bind(':naam',       $data['naam'],       PDO::PARAM_STR);
-        $this->db->bind(':email',      $data['email'],      PDO::PARAM_STR);
-        $this->db->bind(':wachtwoord', $data['wachtwoord'], PDO::PARAM_STR);
-        $this->db->bind(':status',     $data['status'],     PDO::PARAM_STR);
-        return $this->db->execute();
-    }
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
 
-    /** Controleert of e-mail al bestaat in accounts */
-    public function emailBestaat($email)
-    {
-        $this->db->query("SELECT Id FROM accounts WHERE Email = :email");
-        $this->db->bind(':email', $email, PDO::PARAM_STR);
-        return $this->db->single() ? true : false;
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function voegMedewerkerToe($voornaam, $tussenvoegsel, $achternaam, $email, $wachtwoord, $medewerkersoort, $telefoonnummer)
     {
-        // Voeg gebruiker toe
-        $sql = "INSERT INTO gebruikers (voornaam, tussenvoegsel, achternaam, email, wachtwoord, rol_id, is_actief)
-                VALUES (:voornaam, :tussenvoegsel, :achternaam, :email, :wachtwoord, 2, b'1')";
+        try {
+            $this->db->beginTransaction();
 
-        $stmt = $this->db->prepare($sql);
-        $stmt->bindValue(':voornaam',      $voornaam,      PDO::PARAM_STR);
-        $stmt->bindValue(':tussenvoegsel', $tussenvoegsel, PDO::PARAM_STR);
-        $stmt->bindValue(':achternaam',    $achternaam,    PDO::PARAM_STR);
-        $stmt->bindValue(':email',         $email,         PDO::PARAM_STR);
-        $stmt->bindValue(':wachtwoord',    $wachtwoord,    PDO::PARAM_STR);
-        $stmt->execute();
+            $hashedWachtwoord = password_hash($wachtwoord, PASSWORD_DEFAULT);
 
-        $gebruikerId = $this->db->lastInsertId();
+            $sql = "INSERT INTO gebruikers 
+                    (voornaam, tussenvoegsel, achternaam, email, wachtwoord, rol_id, is_actief)
+                    VALUES 
+                    (:voornaam, :tussenvoegsel, :achternaam, :email, :wachtwoord, 2, b'1')";
 
-        // Voeg medewerker toe
-        $sql2 = "INSERT INTO medewerkers (gebruiker_id, medewerkersoort, telefoonnummer, is_actief)
-                 VALUES (:gebruiker_id, :medewerkersoort, :telefoonnummer, b'1')";
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindValue(':voornaam', $voornaam, PDO::PARAM_STR);
+            $stmt->bindValue(':tussenvoegsel', $tussenvoegsel, PDO::PARAM_STR);
+            $stmt->bindValue(':achternaam', $achternaam, PDO::PARAM_STR);
+            $stmt->bindValue(':email', $email, PDO::PARAM_STR);
+            $stmt->bindValue(':wachtwoord', $hashedWachtwoord, PDO::PARAM_STR);
+            $stmt->execute();
 
-        $stmt2 = $this->db->prepare($sql2);
-        $stmt2->bindValue(':gebruiker_id',    $gebruikerId,    PDO::PARAM_INT);
-        $stmt2->bindValue(':medewerkersoort', $medewerkersoort, PDO::PARAM_STR);
-        $stmt2->bindValue(':telefoonnummer',  $telefoonnummer,  PDO::PARAM_STR);
+            $gebruikerId = $this->db->lastInsertId();
 
-        return $stmt2->execute();
+            $sql2 = "INSERT INTO medewerkers 
+                     (gebruiker_id, medewerkersoort, telefoonnummer, is_actief)
+                     VALUES 
+                     (:gebruiker_id, :medewerkersoort, :telefoonnummer, b'1')";
+
+            $stmt2 = $this->db->prepare($sql2);
+            $stmt2->bindValue(':gebruiker_id', $gebruikerId, PDO::PARAM_INT);
+            $stmt2->bindValue(':medewerkersoort', $medewerkersoort, PDO::PARAM_STR);
+            $stmt2->bindValue(':telefoonnummer', $telefoonnummer, PDO::PARAM_STR);
+            $stmt2->execute();
+
+            $this->db->commit();
+            return true;
+        } catch (Exception $e) {
+            if ($this->db->inTransaction()) {
+                $this->db->rollBack();
+            }
+
+            return false;
+        }
     }
 
     public function emailBestaat($email)
