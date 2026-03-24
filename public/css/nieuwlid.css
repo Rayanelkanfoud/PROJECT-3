@@ -1,0 +1,127 @@
+.nieuwlid-hero {
+    padding: 110px 0 70px 0;
+    background: linear-gradient(135deg, #2c7a4b, #1f5c38);
+    color: #ffffff;
+}
+
+.nieuwlid-badge {
+    display: inline-block;
+    margin-bottom: 18px;
+    padding: 8px 14px;
+    background-color: #ffffff;
+    color: #2c7a4b;
+    border-radius: 999px;
+    font-weight: 700;
+}
+
+.nieuwlid-hero h1 {
+    margin-bottom: 18px;
+    font-size: 52px;
+    line-height: 1.1;
+}
+
+.nieuwlid-intro {
+    max-width: 720px;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.nieuwlid-formulier-sectie {
+    padding: 80px 0;
+    background-color: #f6fbf8;
+}
+
+.nieuwlid-formulier-box {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 40px;
+    background-color: #ffffff;
+    border: 1px solid #d8e8dd;
+    border-radius: 18px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+}
+
+.nieuwlid-formulier-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+.nieuwlid-formulier-grid label,
+.nieuwlid-formulier label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #1a4d30;
+}
+
+.nieuwlid-formulier-grid input,
+.nieuwlid-formulier input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #b8d8c4;
+    border-radius: 8px;
+    font-size: 15px;
+    box-sizing: border-box;
+}
+
+.nieuwlid-melding {
+    padding: 14px 18px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.nieuwlid-melding--succes {
+    background-color: #d1fae5;
+    color: #065f46;
+    border: 1px solid #6ee7b7;
+}
+
+.nieuwlid-melding--fout {
+    background-color: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #fca5a5;
+}
+
+.nieuwlid-fout {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 60px 0;
+    background: linear-gradient(135deg, #2c7a4b, #1f5c38);
+}
+
+.nieuwlid-fout-box {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 50px 40px;
+    background-color: #ffffff;
+    border-radius: 18px;
+    text-align: center;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
+}
+
+.nieuwlid-fout-box h1 {
+    margin-bottom: 18px;
+    color: #2c7a4b;
+    font-size: 40px;
+}
+
+.nieuwlid-fout-box p {
+    margin-bottom: 24px;
+    color: #355342;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+@media (max-width: 700px) {
+    .nieuwlid-formulier-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .nieuwlid-hero h1 {
+        font-size: 38px;
+    }
+}
