@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../libraries/Database.php';
+
 /**
  * Model: Lid — beheert alle CRUD-operaties voor de tabel leden
  */
