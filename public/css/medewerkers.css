@@ -96,3 +96,75 @@
         font-size: 40px;
     }
 }
+
+/* Nieuwe medewerker formulier */
+.medewerker-toevoegen {
+    padding: 80px 0;
+    background-color: #ffffff;
+}
+
+.medewerker-formulier-box {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 40px;
+    background-color: #f6fbf8;
+    border: 1px solid #d8e8dd;
+    border-radius: 18px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+}
+
+.medewerker-formulier-box h2 {
+    margin-bottom: 28px;
+    color: #2c7a4b;
+    font-size: 28px;
+}
+
+.medewerker-formulier-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+.medewerker-formulier-grid label,
+.medewerker-formulier label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #1a4d30;
+}
+
+.medewerker-formulier-grid input,
+.medewerker-formulier input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #b8d8c4;
+    border-radius: 8px;
+    font-size: 15px;
+    box-sizing: border-box;
+}
+
+.medewerker-melding {
+    padding: 14px 18px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.medewerker-melding--succes {
+    background-color: #d1fae5;
+    color: #065f46;
+    border: 1px solid #6ee7b7;
+}
+
+.medewerker-melding--fout {
+    background-color: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #fca5a5;
+}
+
+@media (max-width: 700px) {
+    .medewerker-formulier-grid {
+        grid-template-columns: 1fr;
+    }
+}

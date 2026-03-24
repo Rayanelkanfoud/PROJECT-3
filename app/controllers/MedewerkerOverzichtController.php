@@ -1,46 +1,68 @@
 <?php
-class MedewerkerController extends BaseController
-{
-    // READ — overzicht
-    public function index()
-    {
-        $medewerkerModel = $this->model('Medewerker');
-        $this->view('medewerker/index', ['medewerkers' => $medewerkerModel->getAll()]);
-    }
+require_once '../app/models/Medewerker.php';
 
-    // CREATE — formulier tonen + opslaan
-    public function create()
-    {
-        $data = ['fouten' => [], 'naam' => '', 'email' => '', 'wachtwoord' => '', 'status' => 'actief'];
+$testUnhappy = false;
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $data = array_merge($data, [
-                'naam'       => trim($_POST['naam']       ?? ''),
-                'email'      => trim($_POST['email']      ?? ''),
-                'wachtwoord' => $_POST['wachtwoord']      ?? '',
-                'status'     => $_POST['status']          ?? 'actief',
-            ]);
+$succesmelding = '';
+$foutmelding   = '';
 
-            // Validatie
-            if (empty($data['naam']))       $data['fouten'][] = 'Naam is verplicht.';
-            if (empty($data['email']))      $data['fouten'][] = 'E-mail is verplicht.';
-            elseif (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) $data['fouten'][] = 'Ongeldig e-mailadres.';
-            if (empty($data['wachtwoord'])) $data['fouten'][] = 'Wachtwoord is verplicht.';
-            elseif (strlen($data['wachtwoord']) < 8) $data['fouten'][] = 'Wachtwoord moet minimaal 8 tekens bevatten.';
+$voornaam        = '';
+$tussenvoegsel   = '';
+$achternaam      = '';
+$email           = '';
+$wachtwoord      = '';
+$medewerkersoort = '';
+$telefoonnummer  = '';
 
-            if (empty($data['fouten'])) {
-                $medewerkerModel = $this->model('Medewerker');
-                if ($medewerkerModel->emailBestaat($data['email'])) {
-                    $data['fouten'][] = 'Dit e-mailadres is al in gebruik.';
-                } else {
-                    $data['wachtwoord'] = password_hash($data['wachtwoord'], PASSWORD_DEFAULT);
-                    $medewerkerModel->create($data);
-                    header('Location: ' . URLROOT . '/medewerker/index?melding=toegevoegd');
-                    exit;
-                }
+try {
+    $medewerkerModel = new Medewerker();
+
+    // Formulier verwerken
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $voornaam        = trim($_POST['voornaam']        ?? '');
+        $tussenvoegsel   = trim($_POST['tussenvoegsel']   ?? '');
+        $achternaam      = trim($_POST['achternaam']      ?? '');
+        $email           = trim($_POST['email']           ?? '');
+        $wachtwoord      = $_POST['wachtwoord']           ?? '';
+        $medewerkersoort = trim($_POST['medewerkersoort'] ?? '');
+        $telefoonnummer  = trim($_POST['telefoonnummer']  ?? '');
+
+        // Validatie
+        if ($voornaam === '' || $achternaam === '' || $email === '' || $wachtwoord === '' || $medewerkersoort === '') {
+            $foutmelding = 'Vul alle verplichte velden in.';
+        } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $foutmelding = 'Vul een geldig e-mailadres in.';
+        } elseif (strlen($wachtwoord) < 8) {
+            $foutmelding = 'Het wachtwoord moet minimaal 8 tekens bevatten.';
+        } elseif ($medewerkerModel->emailBestaat($email)) {
+            $foutmelding = 'Dit e-mailadres is al in gebruik.';
+        } else {
+            $wachtwoordHash = password_hash($wachtwoord, PASSWORD_DEFAULT);
+            $gelukt = $medewerkerModel->voegMedewerkerToe(
+                $voornaam, $tussenvoegsel, $achternaam, $email,
+                $wachtwoordHash, $medewerkersoort, $telefoonnummer
+            );
+
+            if ($gelukt) {
+                $succesmelding = 'De medewerker is succesvol opgeslagen.';
+                $voornaam = $tussenvoegsel = $achternaam = $email = $wachtwoord = $medewerkersoort = $telefoonnummer = '';
+            } else {
+                $foutmelding = 'De medewerker kon niet worden opgeslagen.';
             }
         }
+    }
 
-        $this->view('medewerker/create', $data);
+    if ($testUnhappy) {
+        $medewerkers = [];
+    } else {
+        $medewerkers = $medewerkerModel->getAlleMedewerkers();
+    }
+
+    if (!empty($medewerkers) || $succesmelding !== '' || $foutmelding !== '' || $_SERVER['REQUEST_METHOD'] === 'POST') {
+        require_once '../app/views/medewerkeroverzicht/index.php';
+    } elseif (empty($medewerkers)) {
+        require_once '../app/views/medewerkeroverzicht/index.php';
+    } else {
+        require_once '../app/views/medewerkeroverzicht/fout.php';
     }
 }
