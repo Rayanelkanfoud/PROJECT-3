@@ -27,8 +27,14 @@
 }
 
 .accounts-overzicht {
-    padding: 80px 0;
+    padding: 80px 0 40px 0;
     background-color: #f6fbf8;
+}
+
+.accounts-subtitel {
+    margin-bottom: 20px;
+    color: #2c7a4b;
+    font-size: 30px;
 }
 
 .accounts-tabel-wrapper {
@@ -54,45 +60,102 @@
     padding: 16px 14px;
     text-align: left;
     border-bottom: 1px solid #e4efe7;
+    white-space: nowrap;
 }
 
 .accounts-tabel tbody tr:hover {
     background-color: #f1f8f4;
 }
 
-.accounts-fout {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    padding: 60px 0;
-    background: linear-gradient(135deg, #2c7a4b, #1f5c38);
+.account-toevoegen {
+    padding: 0 0 80px 0;
+    background-color: #f6fbf8;
 }
 
-.accounts-fout-box {
-    max-width: 760px;
-    margin: 0 auto;
-    padding: 50px 40px;
+.account-formulier-box {
+    padding: 32px;
     background-color: #ffffff;
+    border: 1px solid #d8e8dd;
     border-radius: 18px;
-    text-align: center;
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
 }
 
-.accounts-fout-box h1 {
-    margin-bottom: 18px;
-    color: #2c7a4b;
-    font-size: 40px;
-}
-
-.accounts-fout-box p {
+.account-formulier-box h2 {
     margin-bottom: 24px;
-    color: #355342;
-    font-size: 18px;
-    line-height: 1.6;
+    color: #2c7a4b;
+    font-size: 32px;
+}
+
+.account-melding {
+    margin-bottom: 20px;
+    padding: 16px 18px;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+.account-melding--succes {
+    background-color: #edf7f0;
+    color: #2c7a4b;
+}
+
+.account-melding--fout {
+    background-color: #fff1f1;
+    color: #a13b3b;
+}
+
+.account-formulier {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.account-formulier-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.formulier-groep {
+    display: flex;
+    flex-direction: column;
+}
+
+.formulier-groep label {
+    margin-bottom: 8px;
+    color: #2c7a4b;
+    font-weight: 700;
+}
+
+.formulier-groep input,
+.formulier-groep select,
+.formulier-groep textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #cfe1d5;
+    border-radius: 10px;
+    font-size: 16px;
+    outline: none;
+    background-color: #ffffff;
+    color: #1f3b2d;
+}
+
+.formulier-groep input:focus,
+.formulier-groep select:focus,
+.formulier-groep textarea:focus {
+    border-color: #2c7a4b;
+}
+
+.opmerking-groep textarea {
+    resize: vertical;
+    min-height: 120px;
 }
 
 @media (max-width: 900px) {
     .accounts-hero h1 {
         font-size: 40px;
+    }
+
+    .account-formulier-grid {
+        grid-template-columns: 1fr;
     }
 }

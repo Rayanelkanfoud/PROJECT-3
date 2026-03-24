@@ -2,13 +2,18 @@
 
 <section class="lessen-hero">
     <div class="container">
-
-
+        <p class="lessen-badge">Lessen overzicht</p>
+        <h1>Bekijk en voeg lessen toe</h1>
+        <p class="lessen-intro">
+            Hieronder zie je alle lessen in het systeem en kun je direct een nieuwe les toevoegen.
+        </p>
     </div>
 </section>
-
+<!-- Hier zie je het lessenoverzicht dus de tabel -->
 <section class="lessen-overzicht">
     <div class="container">
+        <h2 class="lessen-subtitel">Alle lessen in het systeem</h2>
+
         <div class="lessen-tabel-wrapper">
             <table class="lessen-tabel">
                 <thead>
@@ -25,6 +30,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <!-- Stukje javascript voor het formulier -->
                     <?php foreach ($lessen as $les): ?>
                         <tr>
                             <td><?php echo $les['id']; ?></td>
@@ -43,7 +49,7 @@
         </div>
     </div>
 </section>
-
+<!-- Hier heb je het formulier  -->
 <section class="les-toevoegen">
     <div class="container">
         <div class="les-formulier-box">
@@ -60,40 +66,40 @@
                     <?php echo htmlspecialchars($foutmelding); ?>
                 </div>
             <?php endif; ?>
-
+<!-- Hier heb je de velden van het formulier -->
             <form method="POST" action="" class="les-formulier">
                 <div class="les-formulier-grid">
-                    <div>
+                    <div class="formulier-groep">
                         <label for="naam">Naam</label>
                         <input type="text" id="naam" name="naam" value="<?php echo htmlspecialchars($naam); ?>">
                     </div>
 
-                    <div>
+                    <div class="formulier-groep">
                         <label for="prijs">Prijs</label>
                         <input type="number" step="0.01" id="prijs" name="prijs" value="<?php echo htmlspecialchars($prijs); ?>">
                     </div>
 
-                    <div>
+                    <div class="formulier-groep">
                         <label for="datum">Datum</label>
                         <input type="date" id="datum" name="datum" value="<?php echo htmlspecialchars($datum); ?>">
                     </div>
 
-                    <div>
+                    <div class="formulier-groep">
                         <label for="tijd">Tijd</label>
                         <input type="time" id="tijd" name="tijd" value="<?php echo htmlspecialchars($tijd); ?>">
                     </div>
 
-                    <div>
+                    <div class="formulier-groep">
                         <label for="min_aantal_personen">Minimaal aantal personen</label>
                         <input type="number" id="min_aantal_personen" name="min_aantal_personen" value="<?php echo htmlspecialchars($minAantalPersonen); ?>">
                     </div>
 
-                    <div>
+                    <div class="formulier-groep">
                         <label for="max_aantal_personen">Maximaal aantal personen</label>
                         <input type="number" id="max_aantal_personen" name="max_aantal_personen" value="<?php echo htmlspecialchars($maxAantalPersonen); ?>">
                     </div>
 
-                    <div>
+                    <div class="formulier-groep">
                         <label for="status">Status</label>
                         <select id="status" name="status">
                             <option value="">Kies een status</option>
@@ -104,13 +110,13 @@
                         </select>
                     </div>
 
-                    <div class="checkbox-vak">
+                    <div class="formulier-groep checkbox-groep">
                         <label for="is_aanbieding">Aanbieding</label>
                         <input type="checkbox" id="is_aanbieding" name="is_aanbieding" <?php echo $isAanbieding ? 'checked' : ''; ?>>
                     </div>
                 </div>
 
-                <div class="opmerking-vak">
+                <div class="formulier-groep opmerking-groep">
                     <label for="opmerking">Opmerking</label>
                     <textarea id="opmerking" name="opmerking" rows="4"><?php echo htmlspecialchars($opmerking); ?></textarea>
                 </div>

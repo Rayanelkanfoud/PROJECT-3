@@ -1,0 +1,169 @@
+.ledenperiode-hero {
+    padding: 110px 0 70px 0;
+    background: linear-gradient(135deg, #2c7a4b, #1f5c38);
+    color: #ffffff;
+}
+
+.ledenperiode-badge {
+    display: inline-block;
+    margin-bottom: 18px;
+    padding: 8px 14px;
+    background-color: #ffffff;
+    color: #2c7a4b;
+    border-radius: 999px;
+    font-weight: 700;
+}
+
+.ledenperiode-hero h1 {
+    margin-bottom: 18px;
+    font-size: 52px;
+    line-height: 1.1;
+}
+
+.ledenperiode-intro {
+    max-width: 720px;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.ledenperiode-sectie {
+    padding: 80px 0;
+    background-color: #f6fbf8;
+}
+
+.ledenperiode-box {
+    padding: 32px;
+    background-color: #ffffff;
+    border: 1px solid #d8e8dd;
+    border-radius: 18px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+}
+
+.ledenperiode-formulier {
+    display: flex;
+    align-items: end;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+}
+
+.ledenperiode-formulier-groep {
+    display: flex;
+    flex-direction: column;
+    min-width: 260px;
+}
+
+.ledenperiode-formulier-groep label {
+    margin-bottom: 8px;
+    color: #2c7a4b;
+    font-weight: 700;
+}
+
+.ledenperiode-formulier-groep input {
+    padding: 14px 16px;
+    border: 1px solid #cfe1d5;
+    border-radius: 10px;
+    font-size: 16px;
+    outline: none;
+}
+
+.ledenperiode-formulier-groep input:focus {
+    border-color: #2c7a4b;
+}
+
+.ledenperiode-melding {
+    margin-bottom: 24px;
+    padding: 16px 18px;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+.ledenperiode-melding--fout {
+    background-color: #fff1f1;
+    color: #a13b3b;
+}
+
+.ledenperiode-resultaat h2 {
+    margin-bottom: 18px;
+    color: #2c7a4b;
+    font-size: 28px;
+}
+
+.ledenperiode-kaart {
+    padding: 28px;
+    background-color: #edf7f0;
+    border: 1px solid #d8e8dd;
+    border-radius: 16px;
+    max-width: 320px;
+    text-align: center;
+}
+
+.ledenperiode-aantal {
+    display: block;
+    margin-bottom: 10px;
+    color: #2c7a4b;
+    font-size: 52px;
+    font-weight: 700;
+}
+
+.ledenperiode-kaart p {
+    color: #355342;
+    font-size: 18px;
+}
+
+.ledenperiode-beschikbaar {
+    margin-top: 32px;
+}
+
+.ledenperiode-beschikbaar h3 {
+    margin-bottom: 14px;
+    color: #2c7a4b;
+    font-size: 22px;
+}
+
+.ledenperiode-tags {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.ledenperiode-tag {
+    display: inline-block;
+    padding: 10px 14px;
+    background-color: #f1f8f4;
+    color: #2c7a4b;
+    border: 1px solid #d8e8dd;
+    border-radius: 999px;
+    font-weight: 600;
+}
+
+.ledenperiode-fout {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 60px 0;
+    background: linear-gradient(135deg, #2c7a4b, #1f5c38);
+}
+
+.ledenperiode-fout-box {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 50px 40px;
+    background-color: #ffffff;
+    border-radius: 18px;
+    text-align: center;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
+}
+
+.ledenperiode-fout-box h1 {
+    margin-bottom: 18px;
+    color: #2c7a4b;
+    font-size: 40px;
+}
+
+.ledenperiode-fout-box p {
+    margin-bottom: 24px;
+    color: #355342;
+    font-size: 18px;
+    line-height: 1.6;
+}

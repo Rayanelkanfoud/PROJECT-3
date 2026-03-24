@@ -12,6 +12,8 @@ if (session_status() === PHP_SESSION_NONE) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo APP_NAAM; ?></title>
 
+
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/aantalleden.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/site.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/home.css">
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/aanbiedingen.css">
@@ -46,6 +48,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
             <a href="<?php echo URLROOT; ?>/reserveringen.php">Reserveringen</a>
             <a href="<?php echo URLROOT; ?>/geplandelessen.php">Planning</a>
+            <a href="<?php echo URLROOT; ?>/aantalleden.php">Aantal leden</a>
 
 <?php if (isset($_SESSION['gebruiker_id'])): ?>
     <a href="<?php echo URLROOT; ?>/uitloggen.php">Uitloggen</a>

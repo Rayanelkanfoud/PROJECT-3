@@ -1,6 +1,40 @@
+.lessen-hero {
+    padding: 110px 0 70px 0;
+    background: linear-gradient(135deg, #2c7a4b, #1f5c38);
+    color: #ffffff;
+}
+
+.lessen-badge {
+    display: inline-block;
+    margin-bottom: 18px;
+    padding: 8px 14px;
+    background-color: #ffffff;
+    color: #2c7a4b;
+    border-radius: 999px;
+    font-weight: 700;
+}
+
+.lessen-hero h1 {
+    margin-bottom: 18px;
+    font-size: 52px;
+    line-height: 1.1;
+}
+
+.lessen-intro {
+    max-width: 720px;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
 .lessen-overzicht {
     padding: 80px 0 40px 0;
     background-color: #f6fbf8;
+}
+
+.lessen-subtitel {
+    margin-bottom: 20px;
+    color: #2c7a4b;
+    font-size: 30px;
 }
 
 .lessen-tabel-wrapper {
@@ -31,4 +65,103 @@
 
 .lessen-tabel tbody tr:hover {
     background-color: #f1f8f4;
+}
+
+.les-toevoegen {
+    padding: 0 0 80px 0;
+    background-color: #f6fbf8;
+}
+
+.les-formulier-box {
+    padding: 32px;
+    background-color: #ffffff;
+    border: 1px solid #d8e8dd;
+    border-radius: 18px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+}
+
+.les-formulier-box h2 {
+    margin-bottom: 24px;
+    color: #2c7a4b;
+    font-size: 32px;
+}
+
+.les-melding {
+    margin-bottom: 20px;
+    padding: 16px 18px;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+.les-melding--succes {
+    background-color: #edf7f0;
+    color: #2c7a4b;
+}
+
+.les-melding--fout {
+    background-color: #fff1f1;
+    color: #a13b3b;
+}
+
+.les-formulier {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.les-formulier-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.formulier-groep {
+    display: flex;
+    flex-direction: column;
+}
+
+.formulier-groep label {
+    margin-bottom: 8px;
+    color: #2c7a4b;
+    font-weight: 700;
+}
+
+.formulier-groep input,
+.formulier-groep select,
+.formulier-groep textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #cfe1d5;
+    border-radius: 10px;
+    font-size: 16px;
+    outline: none;
+    background-color: #ffffff;
+    color: #1f3b2d;
+}
+
+.formulier-groep input:focus,
+.formulier-groep select:focus,
+.formulier-groep textarea:focus {
+    border-color: #2c7a4b;
+}
+
+.checkbox-groep input {
+    width: 20px;
+    height: 20px;
+    margin-top: 8px;
+}
+
+.opmerking-groep textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+@media (max-width: 900px) {
+    .lessen-hero h1 {
+        font-size: 40px;
+    }
+
+    .les-formulier-grid {
+        grid-template-columns: 1fr;
+    }
 }

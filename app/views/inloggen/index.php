@@ -30,10 +30,10 @@
                     name="wachtwoord"
                     placeholder="Vul je wachtwoord in"
                 >
-
+<!-- Hier de versturen knop -->
                 <button type="submit" class="button-primary">Inloggen</button>
             </form>
-
+<!-- Stukje javascript zodat de inlog werkt -->
             <?php if ($foutmelding !== ''): ?>
                 <div class="inloggen-melding inloggen-melding--fout">
                     <?php echo htmlspecialchars($foutmelding); ?>

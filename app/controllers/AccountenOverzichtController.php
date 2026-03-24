@@ -1,28 +1,73 @@
 <?php
-// Model laden om accounts uit de database op te halen
 require_once '../app/models/Account.php';
 
-// Hiermee kun je tijdelijk het unhappy scenario testen
-$testUnhappy = false;
+$accountModel = new Account();
+
+$succesmelding = '';
+$foutmelding = '';
+$rollen = [];
+
+$rolId = '';
+$voornaam = '';
+$tussenvoegsel = '';
+$achternaam = '';
+$email = '';
+$wachtwoord = '';
+$opmerking = '';
 
 try {
-    if ($testUnhappy) {
-        // Lege array gebruiken om foutscenario te testen
-        $accounts = [];
-    } else {
-        // Model aanmaken en alle accounts ophalen
-        $accountModel = new Account();
-        $accounts = $accountModel->getAlleAccounts();
+    $rollen = $accountModel->getAlleRollen();
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $rolId = trim($_POST['rol_id'] ?? '');
+        $voornaam = trim($_POST['voornaam'] ?? '');
+        $tussenvoegsel = trim($_POST['tussenvoegsel'] ?? '');
+        $achternaam = trim($_POST['achternaam'] ?? '');
+        $email = trim($_POST['email'] ?? '');
+        $wachtwoord = trim($_POST['wachtwoord'] ?? '');
+        $opmerking = trim($_POST['opmerking'] ?? '');
+
+        if (
+            $rolId === '' ||
+            $voornaam === '' ||
+            $achternaam === '' ||
+            $email === '' ||
+            $wachtwoord === ''
+        ) {
+            $foutmelding = 'Vul alle verplichte velden in.';
+        } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $foutmelding = 'Vul een geldig e-mailadres in.';
+        } elseif ($accountModel->emailBestaatAl($email)) {
+            $foutmelding = 'Dit e-mailadres bestaat al.';
+        } else {
+            $gelukt = $accountModel->voegAccountToe(
+                (int)$rolId,
+                $voornaam,
+                $tussenvoegsel,
+                $achternaam,
+                $email,
+                $wachtwoord,
+                $opmerking
+            );
+
+            if ($gelukt) {
+                $succesmelding = 'Het account is succesvol opgeslagen.';
+                $rolId = '';
+                $voornaam = '';
+                $tussenvoegsel = '';
+                $achternaam = '';
+                $email = '';
+                $wachtwoord = '';
+                $opmerking = '';
+            } else {
+                $foutmelding = 'Het account kon niet worden opgeslagen.';
+            }
+        }
     }
 
-    // Als er accounts zijn gevonden, toon het overzicht
-    if (!empty($accounts)) {
-        require_once '../app/views/accountenoverzicht/index.php';
-    } else {
-        // Unhappy flow: geen accounts gevonden
-        require_once '../app/views/accountenoverzicht/fout.php';
-    }
+    $accounts = $accountModel->getAlleAccounts();
+
+    require_once '../app/views/accountenoverzicht/index.php';
 } catch (Exception $e) {
-    // Als er een fout optreedt, toon de foutpagina
-    require_once '../app/views/accountenoverzicht/fout.php';
+    echo $e->getMessage();
 }
