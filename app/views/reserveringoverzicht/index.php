@@ -25,16 +25,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($reserveringen as $reservering): ?>
-                        <tr>
-                            <td><?php echo $reservering['id']; ?></td>
-                            <td><?php echo htmlspecialchars($reservering['lid_naam']); ?></td>
-                            <td><?php echo htmlspecialchars($reservering['les_naam']); ?></td>
-                            <td><?php echo htmlspecialchars($reservering['datum']); ?></td>
-                            <td><?php echo htmlspecialchars($reservering['tijd']); ?></td>
-                            <td><?php echo htmlspecialchars($reservering['reserveringsstatus']); ?></td>
-                        </tr>
-                    <?php endforeach; ?>
+                    <?php if (empty($reserveringen)): ?>
+                        <tr><td colspan="6" style="text-align:center; padding:20px;">Geen reserveringen gevonden.</td></tr>
+                    <?php else: ?>
+                        <?php foreach ($reserveringen as $reservering): ?>
+                            <tr>
+                                <td><?php echo $reservering['id']; ?></td>
+                                <td><?php echo htmlspecialchars($reservering['lid_naam']); ?></td>
+                                <td><?php echo htmlspecialchars($reservering['les_naam']); ?></td>
+                                <td><?php echo htmlspecialchars($reservering['datum']); ?></td>
+                                <td><?php echo htmlspecialchars($reservering['tijd']); ?></td>
+                                <td><?php echo htmlspecialchars($reservering['reserveringsstatus']); ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
                 </tbody>
             </table>
         </div>

@@ -15,13 +15,7 @@ try {
         $reserveringen = $reserveringModel->getAlleReserveringen();
     }
 
-    // Als er reserveringen zijn gevonden, toon het overzicht
-    if (!empty($reserveringen)) {
-        require_once '../app/views/reserveringoverzicht/index.php';
-    } else {
-        // Unhappy flow: geen reserveringen gevonden
-        require_once '../app/views/reserveringoverzicht/fout.php';
-    }
+    require_once '../app/views/reserveringoverzicht/index.php';
 } catch (Exception $e) {
     // Als er een fout optreedt, toon de foutpagina
     require_once '../app/views/reserveringoverzicht/fout.php';
