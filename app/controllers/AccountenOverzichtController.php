@@ -19,48 +19,68 @@ try {
     $rollen = $accountModel->getAlleRollen();
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $rolId = trim($_POST['rol_id'] ?? '');
-        $voornaam = trim($_POST['voornaam'] ?? '');
-        $tussenvoegsel = trim($_POST['tussenvoegsel'] ?? '');
-        $achternaam = trim($_POST['achternaam'] ?? '');
-        $email = trim($_POST['email'] ?? '');
-        $wachtwoord = trim($_POST['wachtwoord'] ?? '');
-        $opmerking = trim($_POST['opmerking'] ?? '');
+        $actie = trim($_POST['actie'] ?? '');
 
-        if (
-            $rolId === '' ||
-            $voornaam === '' ||
-            $achternaam === '' ||
-            $email === '' ||
-            $wachtwoord === ''
-        ) {
-            $foutmelding = 'Vul alle verplichte velden in.';
-        } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $foutmelding = 'Vul een geldig e-mailadres in.';
-        } elseif ($accountModel->emailBestaatAl($email)) {
-            $foutmelding = 'Dit e-mailadres bestaat al.';
+        if ($actie === 'annuleer') {
+            // Unhappy scenario: gebruiker heeft de verwijdering geannuleerd
+            $foutmelding = 'Het verwijderen is geannuleerd.';
+        } elseif ($actie === 'verwijder') {
+            // Happy scenario: gebruiker heeft de verwijdering bevestigd
+            $verwijderId = (int)($_POST['verwijder_id'] ?? 0);
+
+            if ($verwijderId > 0) {
+                $gelukt = $accountModel->verwijderAccount($verwijderId);
+
+                if ($gelukt) {
+                    $succesmelding = 'Het account is succesvol verwijderd.';
+                } else {
+                    $foutmelding = 'Het account kon niet worden verwijderd.';
+                }
+            }
         } else {
-            $gelukt = $accountModel->voegAccountToe(
-                (int)$rolId,
-                $voornaam,
-                $tussenvoegsel,
-                $achternaam,
-                $email,
-                $wachtwoord,
-                $opmerking
-            );
+            $rolId = trim($_POST['rol_id'] ?? '');
+            $voornaam = trim($_POST['voornaam'] ?? '');
+            $tussenvoegsel = trim($_POST['tussenvoegsel'] ?? '');
+            $achternaam = trim($_POST['achternaam'] ?? '');
+            $email = trim($_POST['email'] ?? '');
+            $wachtwoord = trim($_POST['wachtwoord'] ?? '');
+            $opmerking = trim($_POST['opmerking'] ?? '');
 
-            if ($gelukt) {
-                $succesmelding = 'Het account is succesvol opgeslagen.';
-                $rolId = '';
-                $voornaam = '';
-                $tussenvoegsel = '';
-                $achternaam = '';
-                $email = '';
-                $wachtwoord = '';
-                $opmerking = '';
+            if (
+                $rolId === '' ||
+                $voornaam === '' ||
+                $achternaam === '' ||
+                $email === '' ||
+                $wachtwoord === ''
+            ) {
+                $foutmelding = 'Vul alle verplichte velden in.';
+            } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $foutmelding = 'Vul een geldig e-mailadres in.';
+            } elseif ($accountModel->emailBestaatAl($email)) {
+                $foutmelding = 'Dit e-mailadres bestaat al.';
             } else {
-                $foutmelding = 'Het account kon niet worden opgeslagen.';
+                $gelukt = $accountModel->voegAccountToe(
+                    (int)$rolId,
+                    $voornaam,
+                    $tussenvoegsel,
+                    $achternaam,
+                    $email,
+                    $wachtwoord,
+                    $opmerking
+                );
+
+                if ($gelukt) {
+                    $succesmelding = 'Het account is succesvol opgeslagen.';
+                    $rolId = '';
+                    $voornaam = '';
+                    $tussenvoegsel = '';
+                    $achternaam = '';
+                    $email = '';
+                    $wachtwoord = '';
+                    $opmerking = '';
+                } else {
+                    $foutmelding = 'Het account kon niet worden opgeslagen.';
+                }
             }
         }
     }

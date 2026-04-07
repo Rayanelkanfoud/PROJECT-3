@@ -159,3 +159,71 @@
         grid-template-columns: 1fr;
     }
 }
+/* Verwijder knop in tabel */
+.button-verwijder {
+    padding: 6px 14px;
+    background-color: #c0392b;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.button-verwijder:hover {
+    background-color: #a93226;
+}
+
+/* Annuleer knop in modal */
+.button-annuleer {
+    padding: 10px 22px;
+    background-color: #6c757d;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.button-annuleer:hover {
+    background-color: #5a6268;
+}
+
+/* Modal overlay */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+/* Modal box */
+.modal-box {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 40px;
+    max-width: 480px;
+    width: 90%;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.modal-box h2 {
+    margin-bottom: 16px;
+    color: #1f3b2d;
+}
+
+.modal-box p {
+    margin-bottom: 28px;
+    color: #444;
+    font-size: 16px;
+}
+
+.modal-knoppen {
+    display: flex;
+    gap: 16px;
+}
