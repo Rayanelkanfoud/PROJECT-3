@@ -78,4 +78,41 @@ class Account
 
         return $stmt->execute();
     }
+
+    public function getAccountById($id)
+    {
+        $sql = "SELECT g.id, g.rol_id, g.voornaam, g.tussenvoegsel, g.achternaam, g.email, g.opmerking
+                FROM gebruikers g
+                WHERE g.id = :id
+                LIMIT 1";
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function wijzigAccount($id, $rolId, $voornaam, $tussenvoegsel, $achternaam, $email, $opmerking)
+    {
+        $sql = "UPDATE gebruikers
+                SET rol_id = :rol_id,
+                    voornaam = :voornaam,
+                    tussenvoegsel = :tussenvoegsel,
+                    achternaam = :achternaam,
+                    email = :email,
+                    opmerking = :opmerking
+                WHERE id = :id";
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':rol_id', $rolId, PDO::PARAM_INT);
+        $stmt->bindValue(':voornaam', $voornaam, PDO::PARAM_STR);
+        $stmt->bindValue(':tussenvoegsel', $tussenvoegsel, PDO::PARAM_STR);
+        $stmt->bindValue(':achternaam', $achternaam, PDO::PARAM_STR);
+        $stmt->bindValue(':email', $email, PDO::PARAM_STR);
+        $stmt->bindValue(':opmerking', $opmerking, PDO::PARAM_STR);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+
+        return $stmt->execute();
+    }
 }
