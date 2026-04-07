@@ -134,4 +134,45 @@ class Medewerker
             return false;
         }
     }
+
+    public function verwijderMedewerker($id)
+    {
+        try {
+            $this->db->beginTransaction();
+
+            // Haal gebruiker_id op voor deze medewerker
+            $sqlGetId = "SELECT gebruiker_id FROM medewerkers WHERE id = :id LIMIT 1";
+            $stmt = $this->db->prepare($sqlGetId);
+            $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if (!$row) {
+                $this->db->rollBack();
+                return false;
+            }
+
+            $gebruikerId = $row['gebruiker_id'];
+
+            // Verwijder medewerker record eerst (FK constraint)
+            $sqlMedewerker = "DELETE FROM medewerkers WHERE id = :id";
+            $stmt2 = $this->db->prepare($sqlMedewerker);
+            $stmt2->bindValue(':id', $id, PDO::PARAM_INT);
+            $stmt2->execute();
+
+            // Verwijder dan het gebruikersaccount
+            $sqlGebruiker = "DELETE FROM gebruikers WHERE id = :gebruiker_id";
+            $stmt3 = $this->db->prepare($sqlGebruiker);
+            $stmt3->bindValue(':gebruiker_id', $gebruikerId, PDO::PARAM_INT);
+            $stmt3->execute();
+
+            $this->db->commit();
+            return true;
+        } catch (Exception $e) {
+            if ($this->db->inTransaction()) {
+                $this->db->rollBack();
+            }
+            return false;
+        }
+    }
 }
