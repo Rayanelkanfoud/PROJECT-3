@@ -131,4 +131,90 @@ class Lid
 
         return $stmt->fetch() !== false;
     }
+
+    public function getLidNieuwById($id)
+    {
+        $sql = "SELECT l.id, l.gebruiker_id, g.voornaam, g.tussenvoegsel, g.achternaam,
+                       g.email, l.mobiel, l.relatienummer
+                FROM leden_nieuw l
+                INNER JOIN gebruikers g ON g.id = l.gebruiker_id
+                WHERE l.id = :id
+                LIMIT 1";
+
+        $stmt = $this->db->getVerbinding()->prepare($sql);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function wijzigLid($lidId, $voornaam, $tussenvoegsel, $achternaam, $email, $mobiel, $relatienummer)
+    {
+        $pdo = $this->db->getVerbinding();
+        try {
+            $pdo->beginTransaction();
+
+            $sqlGebruiker = "UPDATE gebruikers
+                             SET voornaam = :voornaam,
+                                 tussenvoegsel = :tussenvoegsel,
+                                 achternaam = :achternaam,
+                                 email = :email
+                             WHERE id = (SELECT gebruiker_id FROM leden_nieuw WHERE id = :lid_id)";
+
+            $stmt = $pdo->prepare($sqlGebruiker);
+            $stmt->bindValue(':voornaam', $voornaam, PDO::PARAM_STR);
+            $stmt->bindValue(':tussenvoegsel', $tussenvoegsel, PDO::PARAM_STR);
+            $stmt->bindValue(':achternaam', $achternaam, PDO::PARAM_STR);
+            $stmt->bindValue(':email', $email, PDO::PARAM_STR);
+            $stmt->bindValue(':lid_id', $lidId, PDO::PARAM_INT);
+            $stmt->execute();
+
+            $sqlLid = "UPDATE leden_nieuw
+                       SET mobiel = :mobiel,
+                           relatienummer = :relatienummer
+                       WHERE id = :id";
+
+            $stmt2 = $pdo->prepare($sqlLid);
+            $stmt2->bindValue(':mobiel', $mobiel, PDO::PARAM_STR);
+            $stmt2->bindValue(':relatienummer', $relatienummer, PDO::PARAM_STR);
+            $stmt2->bindValue(':id', $lidId, PDO::PARAM_INT);
+            $stmt2->execute();
+
+            $pdo->commit();
+            return true;
+        } catch (Exception $e) {
+            if ($pdo->inTransaction()) $pdo->rollBack();
+            return false;
+        }
+    }
+
+    public function verwijderLidNieuw($id)
+    {
+        $pdo = $this->db->getVerbinding();
+        try {
+            $pdo->beginTransaction();
+
+            $sqlGetId = "SELECT gebruiker_id FROM leden_nieuw WHERE id = :id LIMIT 1";
+            $stmt = $pdo->prepare($sqlGetId);
+            $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if (!$row) { $pdo->rollBack(); return false; }
+
+            $gebruikerId = $row['gebruiker_id'];
+
+            $pdo->prepare("DELETE FROM leden_nieuw WHERE id = :id")
+                ->execute([':id' => $id]);
+
+            $pdo->prepare("DELETE FROM gebruikers WHERE id = :id")
+                ->execute([':id' => $gebruikerId]);
+
+            $pdo->commit();
+            return true;
+        } catch (Exception $e) {
+            if ($pdo->inTransaction()) $pdo->rollBack();
+            return false;
+        }
+    }
 }
