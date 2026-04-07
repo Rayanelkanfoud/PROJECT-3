@@ -24,6 +24,7 @@
                         <th>E-mailadres</th>
                         <th>Rol</th>
                         <th>Actief</th>
+                        <th>Acties</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -34,11 +35,47 @@
                             <td><?php echo htmlspecialchars($account['email']); ?></td>
                             <td><?php echo htmlspecialchars($account['rol']); ?></td>
                             <td><?php echo $account['is_actief'] ? 'Ja' : 'Nee'; ?></td>
+                            <td>
+                                <button
+                                    type="button"
+                                    class="button-verwijder"
+                                    onclick="openVerwijderModal(<?php echo $account['id']; ?>, '<?php echo htmlspecialchars(addslashes($account['volledige_naam'])); ?>')"
+                                >
+                                    Verwijderen
+                                </button>
+                            </td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>
         </div>
+
+        <!-- Bevestigingsmodal voor verwijderen -->
+        <div id="verwijder-modal" class="modal-overlay" style="display:none;">
+            <div class="modal-box">
+                <h2>Account verwijderen</h2>
+                <p>Weet je zeker dat je het account van <strong id="modal-naam"></strong> wilt verwijderen?</p>
+                <div class="modal-knoppen">
+                    <form method="POST" action="" id="bevestig-form">
+                        <input type="hidden" name="actie" value="verwijder">
+                        <input type="hidden" name="verwijder_id" id="modal-verwijder-id" value="">
+                        <button type="submit" class="button-primary">Bevestigen</button>
+                    </form>
+                    <form method="POST" action="">
+                        <input type="hidden" name="actie" value="annuleer">
+                        <button type="submit" class="button-annuleer">Annuleren</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function openVerwijderModal(id, naam) {
+                document.getElementById('modal-naam').textContent = naam;
+                document.getElementById('modal-verwijder-id').value = id;
+                document.getElementById('verwijder-modal').style.display = 'flex';
+            }
+        </script>
     </div>
 </section>
 <!-- Hier accounts toevoegen -->

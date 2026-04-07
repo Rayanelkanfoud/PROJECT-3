@@ -68,4 +68,14 @@ class Account
 
         return $stmt->execute();
     }
+
+    public function verwijderAccount($id)
+    {
+        $sql = "DELETE FROM gebruikers WHERE id = :id";
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+
+        return $stmt->execute();
+    }
 }
