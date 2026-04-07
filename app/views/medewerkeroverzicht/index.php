@@ -64,7 +64,27 @@
 <div id="context-menu" class="context-menu" style="display:none;">
     <ul>
         <li id="context-wijzig">✏️ Wijzigen</li>
+        <li id="context-verwijder">🗑️ Verwijderen</li>
     </ul>
+</div>
+
+<!-- Bevestigingsmodal verwijderen medewerker -->
+<div id="verwijder-medewerker-modal" class="modal-overlay" style="display:none;">
+    <div class="modal-box">
+        <h2>Medewerker verwijderen</h2>
+        <p>Weet je zeker dat je deze medewerker wilt verwijderen?</p>
+        <div class="modal-knoppen">
+            <form method="POST" action="">
+                <input type="hidden" name="actie" value="verwijder_medewerker">
+                <input type="hidden" name="verwijder_id" id="verwijder-medewerker-id" value="">
+                <button type="submit" class="button-primary">Bevestigen</button>
+            </form>
+            <form method="POST" action="">
+                <input type="hidden" name="actie" value="annuleer_verwijder">
+                <button type="submit" class="button-annuleer">Annuleren</button>
+            </form>
+        </div>
+    </div>
 </div>
 
 <!-- Verborgen form om medewerkergegevens te laden (context menu actie) -->
@@ -154,6 +174,15 @@
         if (geselecteerdeRijId) {
             document.getElementById('laad-wijzig-id').value = geselecteerdeRijId;
             document.getElementById('laad-wijzig-form').submit();
+        }
+    });
+
+    // Klik op "Verwijderen" in context menu
+    document.getElementById('context-verwijder').addEventListener('click', function() {
+        contextMenu.style.display = 'none';
+        if (geselecteerdeRijId) {
+            document.getElementById('verwijder-medewerker-id').value = geselecteerdeRijId;
+            document.getElementById('verwijder-medewerker-modal').style.display = 'flex';
         }
     });
 

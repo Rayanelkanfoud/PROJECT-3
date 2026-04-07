@@ -21,7 +21,23 @@ try {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $actie = trim($_POST['actie'] ?? '');
 
-        if ($actie === 'laad_wijzig') {
+        if ($actie === 'verwijder_medewerker') {
+            // Happy scenario: medewerker verwijderen bevestigd
+            $verwijderId = (int)($_POST['verwijder_id'] ?? 0);
+            if ($verwijderId > 0) {
+                $gelukt = $medewerkerModel->verwijderMedewerker($verwijderId);
+                if ($gelukt) {
+                    $succesmelding = 'De medewerker is succesvol verwijderd.';
+                } else {
+                    $foutmelding = 'De medewerker kon niet worden verwijderd.';
+                }
+            }
+
+        } elseif ($actie === 'annuleer_verwijder') {
+            // Unhappy scenario: verwijdering geannuleerd
+            $foutmelding = 'Het verwijderen is geannuleerd.';
+
+        } elseif ($actie === 'laad_wijzig') {
             // Context menu: open wijzig-modal met huidige medewerkergegevens
             $medewerkerID = (int)($_POST['medewerker_id'] ?? 0);
             if ($medewerkerID > 0) {
